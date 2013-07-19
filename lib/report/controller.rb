@@ -303,10 +303,7 @@ module Report::Controller
   ##
   # Fallback: @current_user needs to be set for the engine
   def current_user
-    if @current_user.nil?
-      raise NotImplementedError, "The #{self.class} should have set @current_user before this request"
-    end
-    @current_user
+    @current_user ||= User.anonymous
   end
 
   ##
