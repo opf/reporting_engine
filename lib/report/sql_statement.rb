@@ -154,7 +154,7 @@ class Report::SqlStatement
 
   def default_select(value = nil)
     @default_select = value if value
-    @default_select ||= ["*"]
+    @default_select ||= ["entries.*"]
   end
 
   ##
