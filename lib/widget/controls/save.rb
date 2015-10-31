@@ -24,6 +24,6 @@ class Widget::Controls::Save < Widget::Controls
                   '#',
                   id: 'query-breadcrumb-save',
                   class: 'button icon-context icon-save1',
-                  :"data-target" => url_for(action: 'update', id: @subject.id, set_filter: '1'))
+                  "data-target": url_for(action: 'update', id: @subject.id, set_filter: '1'))
   end
 end

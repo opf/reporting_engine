@@ -21,7 +21,9 @@ class Report::SqlStatement
   class Union
     attr_accessor :first, :second, :as
     def initialize(first, second, as = nil)
-      @first, @second, @as = first, second, as
+      @first = first
+      @second = second
+      @as = as
     end
 
     def to_s

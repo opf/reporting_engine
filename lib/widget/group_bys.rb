@@ -21,7 +21,7 @@ class Widget::GroupBys < Widget::Base
   def render_options(group_by_ary)
     group_by_ary.sort_by(&:label).map do |group_by|
       next unless group_by.selectable?
-      content_tag :option, value: group_by.underscore_name, :'data-label' => "#{CGI::escapeHTML(h(group_by.label))}" do
+      content_tag :option, value: group_by.underscore_name, 'data-label': "#{CGI::escapeHTML(h(group_by.label))}" do
         h(group_by.label)
       end
     end.join.html_safe
@@ -44,13 +44,13 @@ class Widget::GroupBys < Widget::Base
     content_tag :fieldset,
                 id: "group_by_#{type}",
                 class: 'drag_target drag_container',
-                :'data-initially-selected' => initially_selected.to_json.gsub('"', "'") do
+                'data-initially-selected': initially_selected.to_json.tr('"', "'") do
       out = content_tag :legend, l(:"label_#{type}"), class: 'in_row group_by_caption'
 
       out += render_group_caption type
 
       out += label_tag "add_group_by_#{type}",
-                       l(:"label_group_by_add"),
+                       l(:label_group_by_add),
                        class: 'hidden-for-sighted'
 
       out += content_tag :select, id: "add_group_by_#{type}", class: 'advanced-filters--select' do

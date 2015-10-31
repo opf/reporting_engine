@@ -64,7 +64,7 @@ module Report::InheritedAttribute
   end
 
   def inherit?(name)
-    superclass.respond_to? :get_inherited_attribute and not not_inherited.include? name
+    superclass.respond_to? :get_inherited_attribute and !not_inherited.include? name
   end
 
   def not_inherited

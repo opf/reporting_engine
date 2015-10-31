@@ -40,6 +40,6 @@ begin
 
   require 'ci/reporter/rake/rspec'     # use this if you're using RSpec
   require 'ci/reporter/rake/test_unit' # use this if you're using Test::Unit
-  task :"spec:plugins:reporting_engine:ci" => ['ci:setup:rspec', 'spec:plugins:redmine_reporting']
+  task "spec:plugins:reporting_engine:ci": ['ci:setup:rspec', 'spec:plugins:redmine_reporting']
 rescue LoadError
 end

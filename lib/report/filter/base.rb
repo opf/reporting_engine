@@ -66,7 +66,7 @@ class Report::Filter
       @dependents
     end
     class << self
-      alias :dependents :dependent
+      alias_method :dependents, :dependent
     end
 
     # need this for sort
@@ -222,7 +222,7 @@ class Report::Filter
         values  = [*self.values].compact
         # if there is just the nil it might be actually intendet to be there
         values.unshift nil if Array(self.values).size == 1 && Array(self.values).first.nil?
-        values  = values[0, arity] if values and arity >= 0 and arity != values.size
+        values = values[0, arity] if values and arity >= 0 and arity != values.size
         operator.modify(query, field, *values) unless field.empty?
       end
     end

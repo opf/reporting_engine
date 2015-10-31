@@ -24,14 +24,14 @@ class Widget::Settings < Widget::Base
 
   def render_filter_settings
     render_widget Widget::Settings::Fieldset, @subject,
-                  type: 'filters', help_text: filter_help  do
+                  type: 'filters', help_text: filter_help do
       render_widget Widget::Filters, @subject
     end
   end
 
   def render_group_by_settings
     render_widget Widget::Settings::Fieldset, @subject,
-                  type: 'group_by', help_text: group_by_help  do
+                  type: 'group_by', help_text: group_by_help do
       render_widget Widget::GroupBys, @subject
     end
   end
@@ -71,16 +71,12 @@ class Widget::Settings < Widget::Base
   def filter_help
     if help_text.is_a?(Array)
       help_text[0]
-    else
-      nil
     end
   end
 
   def group_by_help
     if help_text.is_a?(Array)
       help_text[1]
-    else
-      nil
     end
   end
 end
