@@ -21,7 +21,7 @@ module Report::QueryUtils
   Infinity = 1.0 / 0
   include Engine
 
-  alias singleton_class metaclass unless respond_to? :singleton_class
+  alias_method :singleton_class, :metaclass unless respond_to? :singleton_class
 
   delegate :quoted_false, :quoted_true, to: 'engine.reporting_connection'
   attr_writer :engine
@@ -183,10 +183,10 @@ module Report::QueryUtils
     options = options.with_indifferent_access
     else_part = options.delete :else
     "-- #{desc}\n\t" \
-    "CASE #{options.map { |k, v|
+    "CASE #{options.map do |k, v|
       "\n\t\tWHEN #{field_name_for k}\n\t\t" \
     "THEN #{field_name_for v}"
-    }.join(', ')}\n\t\tELSE #{field_name_for else_part}\n\tEND"
+    end.join(', ')}\n\t\tELSE #{field_name_for else_part}\n\tEND"
   end
 
   def iso_year_week(field, default_table = nil)
@@ -225,8 +225,8 @@ module Report::QueryUtils
 
   def map_field(key, value)
     case key.to_s
-    when 'singleton_value', /_id$/ then convert_unless_nil(value) { |v| v.to_i }
-    else convert_unless_nil(value) { |v| v.to_s }
+    when 'singleton_value', /_id$/ then convert_unless_nil(value, &:to_i)
+    else convert_unless_nil(value, &:to_s)
     end
   end
 

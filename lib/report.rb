@@ -104,7 +104,10 @@ class Report < ActiveRecord::Base
 
   def add_chain(type, name, options)
     chain type.const_get(name.to_s.camelcase), options
-    @transformer, @table, @depths, @walker = nil, nil, nil, nil
+    @transformer = nil
+    @table = nil
+    @depths = nil
+    @walker = nil
     self
   end
 

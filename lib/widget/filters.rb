@@ -59,7 +59,7 @@ class Widget::Filters < Widget::Base
     engine::Filter.all.select(&:selectable?).map do |filter|
       opts = { id: "filter_#{filter.underscore_name}",
                class: "#{filter.underscore_name} advanced-filters--filter",
-               :"data-filter-name" => filter.underscore_name }
+               "data-filter-name": filter.underscore_name }
       active_instance = active_filters.detect { |f| f.class == filter }
       if active_instance
         opts[:"data-selected"] = true

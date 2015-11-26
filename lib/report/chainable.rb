@@ -110,8 +110,8 @@ class Report < ActiveRecord::Base
     end
 
     class << self
-      alias inherited_attributes inherited_attribute
-      alias accepts_properties accepts_property
+      alias_method :inherited_attributes, :inherited_attribute
+      alias_method :accepts_properties, :accepts_property
     end
 
     attr_accessor :parent, :child, :type
@@ -164,7 +164,10 @@ class Report < ActiveRecord::Base
           send "#{key}=", value
         end
       end
-      self.child, child.parent = child, self if child
+      if child
+        self.child = child
+        child.parent = self
+      end
       move_down until correct_position?
       clear
     end

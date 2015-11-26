@@ -43,8 +43,8 @@ class Widget::Table::Progressbar < Widget::Base
     content_tag(:div, '',
                 id: 'progressbar',
                 class: 'form_controls',
-                :"data-query-size" => @subject.size,
-                :"data-translation" => ::I18n.translate(:label_load_query_question, size: @subject.size),
-                :"data-target" => url_for(action: 'index', set_filter: '1', immediately: true))
+                "data-query-size": @subject.size,
+                "data-translation": ::I18n.translate(:label_load_query_question, size: @subject.size),
+                "data-target": url_for(action: 'index', set_filter: '1', immediately: true))
   end
 end

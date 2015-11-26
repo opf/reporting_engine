@@ -68,7 +68,8 @@ class Report::Table
 
   def fields_for(type)
     @fields_for ||= begin
-      child, fields = query.chain, Hash.new { |h, k| h[k] = [] }
+      child = query.chain
+      fields = Hash.new { |h, k| h[k] = [] }
       until child.filter?
         fields[child.type].push(*child.group_fields)
         child = child.child

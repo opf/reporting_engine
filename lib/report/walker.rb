@@ -67,9 +67,9 @@ class Report::Walker
         sublevel    = 0
         @header_stack << list
       end
-      num_in_col  += 1
-      sublevel    += result.size
-      last_in_col  = (num_in_col >= level_size)
+      num_in_col += 1
+      sublevel += result.size
+      last_in_col = (num_in_col >= level_size)
       @header_stack.last << [result, first_in_col, last_in_col]
       yield(result, level == 0, first_in_col, last_in_col) if block_given?
     end

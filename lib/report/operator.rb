@@ -27,7 +27,7 @@ class Report::Operator
   def self.define_operators # :nodoc:
     # Defaults
     defaults do
-      def_delegators :'singleton_class', :forced?, :force!, :forced
+      def_delegators :singleton_class, :forced?, :force!, :forced
 
       def sql_operator
         name
@@ -57,7 +57,7 @@ class Report::Operator
 
     new 'w', arity: 0, label: :label_this_week do
       def modify(query, field, offset = nil)
-        offset  ||= 0
+        offset ||= 0
         first_day = begin
           Integer I18n.t(:general_first_day_of_week)
         rescue ArgumentError

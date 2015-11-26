@@ -37,7 +37,7 @@ class Widget::Filters::Date < Widget::Filters::Base
                                size: 10,
                                class: 'advanced-filters--text-field',
                                id: "#{id_prefix}arg_1_val",
-                               :'data-type' => 'date'
+                               'data-type': 'date'
         cal1 = calendar_for("#{id_prefix}arg_1_val")
         label1 + text1 + cal1
       end
@@ -51,7 +51,7 @@ class Widget::Filters::Date < Widget::Filters::Base
                                size: 10,
                                class: 'advanced-filters--text-field',
                                id: "#{id_prefix}arg_2_val",
-                               :'data-type' => 'date'
+                               'data-type': 'date'
         cal2 = calendar_for "#{id_prefix}arg_2_val"
         label2 + text2 + cal2
       end

@@ -38,7 +38,8 @@ class Report::Transformer
   def column_first
     @column_first ||= begin
       # reverse since we fake recursion ↓↓↓
-      list, all_fields = restructured.reverse, @all_fields.dup
+      list = restructured.reverse
+      all_fields = @all_fields.dup
       result = list.inject(@ungrouped) do |aggregate, (current_fields, type)|
         fields, all_fields = all_fields, all_fields - current_fields
         aggregate.grouped_by fields, type, current_fields
@@ -51,7 +52,9 @@ class Report::Transformer
   # Important side effect: it sets @ungrouped, @all_fields.
   # @return [Array<Array<Array<String,Symbol>, Symbol>>] Group by fields + types (:row or :column)
   def restructured
-    rows, columns, current = [], [], query.chain
+    rows = []
+    columns = []
+    current = query.chain
     @all_fields = []
     until current.filter?
       @ungrouped = current.result if current.responsible_for_sql?

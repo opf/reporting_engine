@@ -24,7 +24,7 @@ class Report::Result
     attr_accessor :parent, :type, :important_fields
     attr_accessor :key
     attr_reader :value
-    alias values value
+    alias_method :values, :value
     include Enumerable
     include Report::QueryUtils
 
@@ -150,7 +150,7 @@ class Report::Result
   end
 
   class DirectResult < Base
-    alias fields values
+    alias_method :fields, :values
 
     def has_children?
       false
@@ -194,7 +194,7 @@ class Report::Result
     end
 
     def sort!(force = false)
-      return false if @sorted and not force
+      return false if @sorted and !force
       values.sort! { |a, b| compare a.key, b.key }
       values.each { |e| e.sort! force }
       @sorted = true

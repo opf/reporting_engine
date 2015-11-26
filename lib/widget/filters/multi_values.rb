@@ -23,29 +23,28 @@ require_dependency 'widget/filters/base'
 class Widget::Filters::MultiValues < Widget::Filters::Base
   def render
     write(content_tag(:div, id: "#{filter_class.underscore_name}_arg_1", class: 'advanced-filters--filter-value') do
-      select_options = {  :"data-remote-url" => url_for(action: 'available_values'),
+      select_options = {  "data-remote-url": url_for(action: 'available_values'),
                           style: 'vertical-align: top;', # FIXME: Do CSS
                           name: "values[#{filter_class.underscore_name}][]",
-                          :"data-loading" => @options[:lazy] ? 'ajax' : '',
+                          "data-loading": @options[:lazy] ? 'ajax' : '',
                           id: "#{filter_class.underscore_name}_arg_1_val",
                           class: 'advanced-filters--select filter-value',
-                          :"data-filter-name" => filter_class.underscore_name,
+                          "data-filter-name": filter_class.underscore_name,
                           multiple: 'multiple' }
       # multiple will be disabled/enabled later by JavaScript anyhow.
       # We need to specify multiple here because of an IE6-bug.
       if filter_class.has_dependent?
         all_dependents = filter_class.all_dependents.map(&:underscore_name).to_json
-        select_options.merge! :"data-all-dependents" => all_dependents.gsub!('"', "'")
+        select_options.merge! "data-all-dependents": all_dependents.tr!('"', "'")
         next_dependents = filter_class.dependents.map(&:underscore_name).to_json
-        select_options.merge! :"data-next-dependents" => next_dependents.gsub!('"', "'")
+        select_options.merge! "data-next-dependents": next_dependents.tr!('"', "'")
       end
       # store selected value(s) in data-initially-selected if this filter is a dependent
       # of another filter, as we have to restore values manually in the client js
       if (filter_class.is_dependent? || @options[:lazy]) && !Array(filter.values).empty?
-        select_options.merge! :"data-initially-selected" =>
-          filter.values.to_json.gsub!('"', "'") || '[' + filter.values.map { |v| "'#{v}'" }.join(',') + ']'
+        select_options.merge! "data-initially-selected":           filter.values.to_json.tr!('"', "'") || '[' + filter.values.map { |v| "'#{v}'" }.join(',') + ']'
       end
-      select_options.merge! :"data-dependent" => true if filter_class.is_dependent?
+      select_options.merge! "data-dependent": true if filter_class.is_dependent?
       box_content = ''.html_safe
       label = label_tag "#{filter_class.underscore_name}_arg_1_val",
                         h(filter_class.label) + ' ' + l(:label_filter_value),
@@ -55,7 +54,7 @@ class Widget::Filters::MultiValues < Widget::Filters::Base
         render_widget Widget::Filters::Option, filter, to: box_content unless @options[:lazy]
       end
       plus = content_tag :a, href: 'javascript:', class: 'form-label filter_multi-select -transparent',
-                             :"data-filter-name" => filter_class.underscore_name,
+                             "data-filter-name": filter_class.underscore_name,
                              title: l(:description_multi_select) do
         image_tag 'bullet_toggle_plus.png',
                   alt: l(:toggle_multiselect),
